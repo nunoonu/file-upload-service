@@ -7,17 +7,17 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
+type Mail struct {
+	FileName string
+	File     []byte
+}
+
 type mailRepository struct {
 	kafkaCon *kafka.Conn
 }
 
 func NewMailRepository(kCon *kafka.Conn) ports.MailRepository {
 	return &mailRepository{kafkaCon: kCon}
-}
-
-type Mail struct {
-	FileName string
-	File     []byte
 }
 
 func (m mailRepository) Send(_ context.Context, fileName string, file []byte) error {
