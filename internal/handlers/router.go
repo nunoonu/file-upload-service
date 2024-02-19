@@ -9,6 +9,7 @@ func NewRouter(
 ) *gin.Engine {
 	app := gin.Default()
 	app.Use(gin.Recovery())
+	app.Use(VerifyJWT())
 	router := app.Group("/api" + "/v1")
 	router.GET("/health-check", func(c *gin.Context) {
 		c.Status(200)
