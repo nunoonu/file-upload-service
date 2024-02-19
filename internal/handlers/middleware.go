@@ -14,8 +14,8 @@ func VerifyJWT() gin.HandlerFunc {
 	secretKey := "secret"
 	return func(ctx *gin.Context) {
 		jwtToken := ctx.GetHeader("Authorization")
-		tokenString := jwtToken[len(BEARER_SCHEMA):]
-		_, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		tokenStr := jwtToken[len(BEARER_SCHEMA):]
+		_, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
 			if _, isvalid := token.Method.(*jwt.SigningMethodHMAC); !isvalid {
 				slog.Error("Invalid token")
 				return nil, errors.New("Invalid token")
